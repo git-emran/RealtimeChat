@@ -1,11 +1,12 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
+import { generateToken } from "../lib/utils.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
 
   try {
-    if (!fullName || !email || password) {
+    if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -44,7 +45,7 @@ export const signup = async (req, res) => {
         profilePic: newUser.profilePic,
       });
     } else {
-      res.status(400).json({ message: "Invalid user Data" });
+      res.status(200).json({ message: "Invalid user Data" });
     }
   } catch (error) {
     console.log("Error in signup controller", error);

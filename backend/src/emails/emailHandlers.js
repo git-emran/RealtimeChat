@@ -2,6 +2,12 @@ import { resendClient, sender } from "../lib/resend.js";
 import { createWelcomeEmailTemplate } from "./emailTemplates.js";
 
 export const sendWelcomeEmail = async (email, name, clientURL) => {
+  if (!sender?.email || !sender.name) {
+    throw new Error("Error in Sender Email and Name configuration");
+  }
+
+  if (!email) throw new Error("Recepient email is missing");
+  if (!clientURL) throw new Error("Client Url is Missing");
   const { data, error } = await resendClient.emails.send({
     from: `${sender.name} <${sender.email}>`,
     to: email,

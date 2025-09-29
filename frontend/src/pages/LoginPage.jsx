@@ -1,6 +1,10 @@
 function LoginPage() {
   return (
-    <div>LoginPage</div>
+    <div>
+      <h1 className="h2 text-white text-3xl">
+        Login Page
+      </h1>
+    </div>
   )
 }
 
